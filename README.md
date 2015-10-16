@@ -35,3 +35,33 @@ Sorted Intrusive Vector of Pointers test: (12.01, 18.96, 15.28)
 Unsorted Intrusive List test: (0.00, 0.02, 0.00)
 Sorted Intrusive List test: (0.00, 0.01, 0.00)
 ```
+Results on Windows 7/Intel i7-4770K compiled with Visual Studio 2015:
+```
+Number times each test is run: 1000
+Number elements in vectors/lists: 100000
+Number elements to add/remove in a frame: 100
+
+Iteration times(min, max, average) in ms:
+Unsorted Vector of Pointers test: (5.52, 7.08, 6.26)
+Sorted Vector of Pointers test: (5.37, 9.70, 5.70)
+Unsorted Intrusive Vector of Pointers test: (5.43, 12.89, 6.50)
+Sorted Intrusive Vector of Pointers test: (5.40, 9.18, 5.67)
+Unsorted Intrusive List test: (5.51, 9.86, 6.43)
+Sorted Intrusive List test: (5.45, 7.47, 5.68)
+
+Add element times(min, max, average) in ms:
+Unsorted Vector of Pointers test: (0.00, 0.01, 0.00)
+Sorted Vector of Pointers test: (0.53, 0.95, 0.69)
+Unsorted Intrusive Vector of Pointers test: (0.00, 0.00, 0.00)
+Sorted Intrusive Vector of Pointers test: (3.62, 5.52, 4.36)
+Unsorted Intrusive List test: (0.00, 0.00, 0.00)
+Sorted Intrusive List test: (5.12, 11.48, 6.51)
+
+Remove element times(min, max, average) in ms:
+Unsorted Vector of Pointers test: (1.10, 1.75, 1.36)
+Sorted Vector of Pointers test: (0.52, 0.95, 0.66)
+Unsorted Intrusive Vector of Pointers test: (0.00, 0.01, 0.00)
+Sorted Intrusive Vector of Pointers test: (7.98, 13.92, 9.66)
+Unsorted Intrusive List test: (0.00, 0.01, 0.00)
+Sorted Intrusive List test: (0.00, 0.01, 0.00)
+```
