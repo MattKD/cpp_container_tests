@@ -6,8 +6,11 @@ _OBJ = vector_vs_list_test.o util.o update_funcs.o ptr_vector_test.o \
 			 intrusive_ptr_vector_test.o intrusive_list_test.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-vector_vs_list: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+vector_vs_list: $(ODIR) $(OBJ) 
+	$(CC) -o $@ $(OBJ) $(CFLAGS)
+
+$(ODIR):
+	mkdir $@
 
 $(ODIR)/vector_vs_list_test.o: vector_vs_list_test.cpp util.h
 	$(CC) -o $@ -c $< $(CFLAGS)
