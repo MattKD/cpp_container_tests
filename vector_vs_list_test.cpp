@@ -1,6 +1,7 @@
 #include <iostream>
-#include "util.h"
 #include <iomanip>
+#include <cstring>
+#include "util.h"
 
 TestResult ptrVectorTest(int iters, int num_elements, bool sorted, 
                          int num_add_remove);
