@@ -10,6 +10,7 @@ TestResult intrusiveVectorTest(int iters, int num_elements, bool sorted,
 TestResult intrusiveListTest(int iters, int num_elements, bool sorted, 
                              int num_add_remove);
 TestResult setTest(int iters, int num_elements, int num_add_remove);
+TestResult unordered_setTest(int iters, int num_elements, int num_add_remove);
 
 void printUsage();
 int strToInt(const char*);
@@ -53,21 +54,22 @@ int main(int argc, char *argv[])
         << "\n\n";
 
   Test tests[] = { 
-    runTest("Unsorted Vector of Pointers", vectorTest, 
+    runTest("vector", vectorTest, 
             NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
-    runTest("Sorted Vector of Pointers", vectorTest,
+    runTest("vector (sorted)", vectorTest,
             NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE),
-    runTest("Unsorted Intrusive Vector of Pointers", 
+    runTest("intrusive vector", 
             intrusiveVectorTest, NUM_ITERS, NUM_ELEMENTS, 
             false, NUM_ADD_REMOVE),
-    runTest("Sorted Intrusive Vector of Pointers", 
+    runTest("intrusive vector (sorted)", 
             intrusiveVectorTest, NUM_ITERS, NUM_ELEMENTS, 
             true, NUM_ADD_REMOVE),
-    runTest("Unsorted Intrusive List", intrusiveListTest, 
+    runTest("intrusive list", intrusiveListTest, 
             NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
-    runTest("Sorted Intrusive List", intrusiveListTest, 
+    runTest("intrusive list (sorted)", intrusiveListTest, 
             NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE),
-    runTest("Set", setTest, NUM_ITERS, NUM_ELEMENTS, NUM_ADD_REMOVE)
+    runTest("set", setTest, NUM_ITERS, NUM_ELEMENTS, NUM_ADD_REMOVE),
+    runTest("unordered_set", setTest, NUM_ITERS, NUM_ELEMENTS, NUM_ADD_REMOVE)
   };
 
   cout << std::setprecision(2) << std::fixed;
