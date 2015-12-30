@@ -67,7 +67,7 @@ TestResult intrusiveListTest(int iters, int num_elements, bool sorted,
   vector<Bar_C> bar_c_pool(NUM_EACH_TYPE);
   vector<Bar_D> bar_d_pool(NUM_EACH_TYPE);
   vector<Bar*> bar_vec;
-  bar_vec.reserve(num_elements);
+  bar_vec.reserve(NUM_BARS);
 
   Bar head, tail;
   head.prev = nullptr;
