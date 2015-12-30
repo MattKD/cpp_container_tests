@@ -96,10 +96,11 @@ addTest(std::vector<Baz*> &baz_ptrs, std::vector<Baz*> &to_add, bool sorted)
 }
 
 TestResult 
-intrusivePtrVectorTest(int iters, int num_elements, bool sorted, 
+intrusiveVectorTest(int iters, int num_elements, bool sorted, 
                        int num_add_remove)
 {
   using std::vector;
+
   const int NUM_EACH_TYPE = num_elements / 4;
   const int NUM_FOOS = NUM_EACH_TYPE * 4;
 

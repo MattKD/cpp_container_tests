@@ -85,9 +85,10 @@ addTest(std::vector<Foo*> &foo_ptrs, std::vector<Foo*> &to_add, bool sorted)
 }
 
 TestResult 
-ptrVectorTest(int iters, int num_elements, bool sorted, int num_add_remove)
+vectorTest(int iters, int num_elements, bool sorted, int num_add_remove)
 {
   using std::vector;
+
   const int NUM_EACH_TYPE = num_elements / 4;
   const int NUM_FOOS = NUM_EACH_TYPE * 4;
 
