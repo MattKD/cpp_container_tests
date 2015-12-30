@@ -33,4 +33,27 @@ Test runTest(const char *name, const Func &test, Args&&... args)
   return { name, test(std::forward<Args>(args)...) }; 
 }
 
+template <class T>
+static void getRandElems(const std::vector<T> &src, 
+                         std::vector<T> &dest, int num)
+{
+  dest.clear();
+  if (num > (int)src.size()) {
+    num = src.size();
+  }
+
+  for (int i = 0; i < num; ++i) {
+    while (true) {
+      int r = getRandomInt(0, src.size() - 1);
+      auto val = src[r];
+      auto it = std::find(dest.begin(), dest.end(), val);
+      if (it == dest.end()) {
+        dest.push_back(std::move(val));
+        break;
+      }
+    }
+  }
+}
+
+
 #endif

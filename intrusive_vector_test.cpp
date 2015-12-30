@@ -4,23 +4,6 @@
 #include "baz.h"
 #include "util.h"
 
-static void getRandBazs(const std::vector<Baz*> &src, 
-                        std::vector<Baz*> &dest, int num)
-{
-  for (int i = 0; i < num; ++i) {
-    Baz *f;
-    std::vector<Baz*>::iterator it;
-
-    do {
-      int r = getRandomInt(0, src.size() - 1);
-      f = src[r];
-      it = std::find(dest.begin(), dest.end(), f);
-    } while (it != dest.end());
-
-    dest.push_back(f);
-  }
-}
-
 static double 
 iterateTest(std::vector<Baz*> &baz_ptrs)
 {
@@ -135,7 +118,7 @@ intrusiveVectorTest(int iters, int num_elements, bool sorted,
 
   for (int i = 0; i < iters; i++) {
     iterate_times[i] = iterateTest(baz_ptrs);
-    getRandBazs(baz_ptrs, rand_bazs, num_add_remove);
+    getRandElems(baz_ptrs, rand_bazs, num_add_remove);
     remove_times[i] = removeTest(baz_ptrs, rand_bazs, sorted);
     add_times[i] = addTest(baz_ptrs, rand_bazs, sorted);
   }

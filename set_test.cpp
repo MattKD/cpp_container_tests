@@ -5,23 +5,6 @@
 #include "foo.h"
 #include "util.h"
 
-static void getRandFoos(const std::vector<Foo*> &src, 
-                        std::vector<Foo*> &dest, int num)
-{
-  for (int i = 0; i < num; ++i) {
-    Foo *f;
-    std::vector<Foo*>::iterator it;
-
-    do {
-      int r = getRandomInt(0, src.size() - 1);
-      f = src[r];
-      it = std::find(dest.begin(), dest.end(), f);
-    } while (it != dest.end());
-
-    dest.push_back(f);
-  }
-}
-
 static double 
 iterateTest(std::set<Foo*> &foo_ptrs)
 {
@@ -103,7 +86,7 @@ setTest(int iters, int num_elements, int num_add_remove)
 
   for (int i = 0; i < iters; i++) {
     iterate_times[i] = iterateTest(foo_set);
-    getRandFoos(foo_vec, rand_foos, num_add_remove);
+    getRandElems(foo_vec, rand_foos, num_add_remove);
     remove_times[i] = removeTest(foo_set, rand_foos);
     add_times[i] = addTest(foo_set, rand_foos);
     rand_foos.clear();
