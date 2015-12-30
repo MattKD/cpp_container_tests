@@ -9,6 +9,7 @@ TestResult intrusiveVectorTest(int iters, int num_elements, bool sorted,
                                int num_add_remove);
 TestResult intrusiveListTest(int iters, int num_elements, bool sorted, 
                              int num_add_remove);
+TestResult setTest(int iters, int num_elements, int num_add_remove);
 
 void printUsage();
 int strToInt(const char*);
@@ -65,7 +66,8 @@ int main(int argc, char *argv[])
     runTest("Unsorted Intrusive List", intrusiveListTest, 
             NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
     runTest("Sorted Intrusive List", intrusiveListTest, 
-            NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE)
+            NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE),
+    runTest("Set", setTest, NUM_ITERS, NUM_ELEMENTS, NUM_ADD_REMOVE)
   };
 
   cout << std::setprecision(2) << std::fixed;
