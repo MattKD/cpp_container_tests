@@ -3,12 +3,13 @@
 #include <cstring>
 #include "util.h"
 
-TestResult ptrVectorTest(int iters, int num_elements, bool sorted, 
-                         int num_add_remove);
-TestResult intrusivePtrVectorTest(int iters, int num_elements, bool sorted, 
-                         int num_add_remove);
+TestResult vectorTest(int iters, int num_elements, bool sorted, 
+                      int num_add_remove);
+TestResult intrusiveVectorTest(int iters, int num_elements, bool sorted, 
+                               int num_add_remove);
 TestResult intrusiveListTest(int iters, int num_elements, bool sorted, 
                              int num_add_remove);
+
 void printUsage();
 int strToInt(const char*);
 
@@ -51,15 +52,15 @@ int main(int argc, char *argv[])
         << "\n\n";
 
   Test tests[] = { 
-    runTest("Unsorted Vector of Pointers", ptrVectorTest, 
+    runTest("Unsorted Vector of Pointers", vectorTest, 
             NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
-    runTest("Sorted Vector of Pointers", ptrVectorTest,
+    runTest("Sorted Vector of Pointers", vectorTest,
             NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE),
     runTest("Unsorted Intrusive Vector of Pointers", 
-            intrusivePtrVectorTest, NUM_ITERS, NUM_ELEMENTS, 
+            intrusiveVectorTest, NUM_ITERS, NUM_ELEMENTS, 
             false, NUM_ADD_REMOVE),
     runTest("Sorted Intrusive Vector of Pointers", 
-            intrusivePtrVectorTest, NUM_ITERS, NUM_ELEMENTS, 
+            intrusiveVectorTest, NUM_ITERS, NUM_ELEMENTS, 
             true, NUM_ADD_REMOVE),
     runTest("Unsorted Intrusive List", intrusiveListTest, 
             NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
