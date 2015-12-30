@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <utility>
 
 unsigned int getRandomInt();
 int getRandomInt(int min, int max);
@@ -25,12 +26,11 @@ struct Test {
 
 typedef TestResult (*TestType)(int, int, bool, int);
 
-inline
-Test runTest(const char *name, TestType test, int iters, int elems, 
-             bool sorted, int add_remove)
+template <class Func, class... Args>
+Test runTest(const char *name, const Func &test, Args&&... args) 
 {
   std::cout << "Running " << name << " test.\n";
-  return { name, test(iters, elems, sorted, add_remove) }; 
+  return { name, test(std::forward<Args>(args)...) }; 
 }
 
 #endif
