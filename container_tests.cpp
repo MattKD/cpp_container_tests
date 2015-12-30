@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <cstdlib>
 #include "util.h"
 
 TestResult vectorTest(int iters, int num_elements, bool sorted, 
