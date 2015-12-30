@@ -89,7 +89,6 @@ unordered_setTest(int iters, int num_elements, int num_add_remove)
     getRandElems(foo_vec, rand_foos, num_add_remove);
     remove_times[i] = removeTest(foo_set, rand_foos);
     add_times[i] = addTest(foo_set, rand_foos);
-    rand_foos.clear();
   }
 
   TestResult result = { TimeResult(iterate_times), 

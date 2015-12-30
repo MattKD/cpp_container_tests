@@ -20,7 +20,7 @@ iterateTest(std::vector<Foo*> &foo_ptrs)
 }
 
 static double 
-removeTest(std::vector<Foo*> &foo_ptrs, std::vector<Foo*> &to_remove, 
+removeTest(std::vector<Foo*> &foo_ptrs, const std::vector<Foo*> &to_remove, 
            bool sorted)
 {
   namespace c = std::chrono;
@@ -45,7 +45,7 @@ removeTest(std::vector<Foo*> &foo_ptrs, std::vector<Foo*> &to_remove,
 }
 
 static double 
-addTest(std::vector<Foo*> &foo_ptrs, std::vector<Foo*> &to_add, bool sorted)
+addTest(std::vector<Foo*> &foo_ptrs, const std::vector<Foo*> &to_add, bool sorted)
 {
   namespace c = std::chrono;
   auto start = c::high_resolution_clock::now();
@@ -60,7 +60,6 @@ addTest(std::vector<Foo*> &foo_ptrs, std::vector<Foo*> &to_add, bool sorted)
       foo_ptrs.push_back(f);
     }
   }
-  to_add.clear();
 
   auto end = c::high_resolution_clock::now();
   auto d = c::duration<double, c::milliseconds::period>(end-start);

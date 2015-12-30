@@ -20,7 +20,7 @@ iterateTest(std::vector<Baz*> &baz_ptrs)
 }
 
 static double 
-removeTest(std::vector<Baz*> &baz_ptrs, std::vector<Baz*> &to_remove, 
+removeTest(std::vector<Baz*> &baz_ptrs, const std::vector<Baz*> &to_remove, 
            bool sorted)
 {
   namespace c = std::chrono;
@@ -49,7 +49,7 @@ removeTest(std::vector<Baz*> &baz_ptrs, std::vector<Baz*> &to_remove,
 }
 
 static double 
-addTest(std::vector<Baz*> &baz_ptrs, std::vector<Baz*> &to_add, bool sorted)
+addTest(std::vector<Baz*> &baz_ptrs, const std::vector<Baz*> &to_add, bool sorted)
 {
   namespace c = std::chrono;
   auto start = c::high_resolution_clock::now();
@@ -70,8 +70,6 @@ addTest(std::vector<Baz*> &baz_ptrs, std::vector<Baz*> &to_add, bool sorted)
       f->lookup_index = baz_ptrs.size() - 1;
     }
   }
-
-  to_add.clear();
 
   auto end = c::high_resolution_clock::now();
   auto d = c::duration<double, c::milliseconds::period>(end-start);
