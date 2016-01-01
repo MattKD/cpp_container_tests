@@ -1,43 +1,33 @@
-CC = g++
-CFLAGS = -Wall -pedantic -std=c++14 -O2
+CC := g++
+CFLAGS := -Wall -pedantic -std=c++14 -O2
 
-ODIR = build
-_OBJ = container_tests.o intrusive_list_test.o intrusive_vector_test.o \
-			 set_test.o unordered_set_test.o update_funcs.o util.o vector_test.o
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+SRCS := container_tests.cpp intrusive_list_test.cpp intrusive_vector_test.cpp \
+			set_test.cpp unordered_set_test.cpp update_funcs.cpp util.cpp \
+			vector_test.cpp
 
-container_tests: $(ODIR) $(OBJ) 
-	$(CC) -o $@ $(OBJ) $(CFLAGS)
+DEPDIR := deps
+DEPS := $(patsubst %,$(DEPDIR)/%.makefile,$(SRCS))
+ODIR := build
+OBJS := $(patsubst %.cpp,$(ODIR)/%.o,$(SRCS))
+
+container_tests: $(OBJS) 
+	$(CC) -o $@ $(OBJS) $(CFLAGS)
+
+$(DEPDIR):
+	mkdir $@
 
 $(ODIR):
 	mkdir $@
 
-$(ODIR)/container_tests.o: container_tests.cpp util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
+$(DEPDIR)/%.cpp.makefile: %.cpp | $(DEPDIR)
+	$(CC) $(CFLAGS) -MM $< -MT $(ODIR)/$*.o > $@
 
-$(ODIR)/intrusive_list_test.o: intrusive_list_test.cpp bar.h util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
+-include $(DEPS)
 
-$(ODIR)/intrusive_vector_test.o: intrusive_vector_test.cpp baz.h util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(ODIR)/set_test.o: set_test.cpp foo.h util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(ODIR)/unordered_set_test.o: unordered_set_test.cpp foo.h util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(ODIR)/update_funcs.o: update_funcs.cpp util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(ODIR)/util.o: util.cpp util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(ODIR)/vector_test.o: vector_test.cpp foo.h util.h
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-bar.h: update_funcs.h util.h
-
-baz.h: update_funcs.h util.h
-
-foo.h: update_funcs.h util.h
+$(ODIR)/%.o: | $(DEPDIR)/%.cpp.makefile $(ODIR)
+	$(CC) -o $@ -c $*.cpp $(CFLAGS)
+		
+.PHONY: clean
+clean:
+	rm -f $(OBJS)
+	rm -f $(DEPS)
