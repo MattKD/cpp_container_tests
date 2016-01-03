@@ -1,4 +1,4 @@
-// Type for calling update functions for use in intrusivePtrVectorTest
+// Type for calling update functions for use in intrusiveVectorTest
 
 #ifndef BAZ_H
 #define BAZ_H
@@ -71,3 +71,4 @@ private:
 
 
 #endif
+
