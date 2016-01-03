@@ -6,7 +6,7 @@ SRCS := container_tests.cpp intrusive_list_test.cpp intrusive_vector_test.cpp \
 			vector_test.cpp
 
 DEPDIR := deps
-DEPS := $(patsubst %,$(DEPDIR)/%.makefile,$(SRCS))
+DEPS := $(patsubst %.cpp,$(DEPDIR)/%.makefile,$(SRCS))
 ODIR := build
 OBJS := $(patsubst %.cpp,$(ODIR)/%.o,$(SRCS))
 
@@ -19,15 +19,15 @@ $(DEPDIR):
 $(ODIR):
 	mkdir $@
 
-$(DEPDIR)/%.cpp.makefile: %.cpp | $(DEPDIR)
-	$(CC) $(CFLAGS) -MM $< -MT $(ODIR)/$*.o > $@
-
 -include $(DEPS)
 
-$(ODIR)/%.o: | $(DEPDIR)/%.cpp.makefile $(ODIR)
+$(DEPDIR)/%.makefile: | $(DEPDIR)
+	$(CC) $(CFLAGS) -MM $*.cpp -MT "$(ODIR)/$*.o $@" > $@
+	
+$(ODIR)/%.o: | $(ODIR)
 	$(CC) -o $@ -c $*.cpp $(CFLAGS)
 		
 .PHONY: clean
 clean:
-	rm -f $(OBJS)
 	rm -f $(DEPS)
+	rm -f $(OBJS)
