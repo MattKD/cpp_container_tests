@@ -5,7 +5,7 @@
 #include "util.h"
 
 TestResult vectorTest(int iters, int num_elements, bool sorted, 
-                      int num_add_remove);
+                      int num_add_remove, bool batched);
 TestResult intrusiveVectorTest(int iters, int num_elements, bool sorted, 
                                int num_add_remove);
 TestResult intrusiveListTest(int iters, int num_elements, bool sorted, 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
   int NUM_ITERS = 1000;
   int NUM_ELEMENTS = 100000;
-  int NUM_ADD_REMOVE = 100;
+  int NUM_ADD_REMOVE = 500;
 
   try {
     for (int i = 1; i < argc; i++) {
@@ -56,9 +56,11 @@ int main(int argc, char *argv[])
 
   Test tests[] = { 
     runTest("vector", vectorTest, 
-            NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE),
+            NUM_ITERS, NUM_ELEMENTS, false, NUM_ADD_REMOVE, false),
     runTest("vector (sorted)", vectorTest,
-            NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE),
+            NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE, false),
+    runTest("vector (sorted,batched)", vectorTest,
+            NUM_ITERS, NUM_ELEMENTS, true, NUM_ADD_REMOVE, true),
     runTest("intrusive vector", 
             intrusiveVectorTest, NUM_ITERS, NUM_ELEMENTS, 
             false, NUM_ADD_REMOVE),
