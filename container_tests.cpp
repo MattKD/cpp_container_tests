@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
 
 void printUsage()
 {
-  std::cout << "Usage: vector_vs_list_test [-iters COUNT] "
+  std::cout << "Usage: cpp_container_tests [-iters COUNT] "
                "[-elems NUM] [-add_rem NUM]\n"
                "\tDefaults: -iters 1000 -elems 100000 -add_rem 100\n"; 
 }

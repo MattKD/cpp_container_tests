@@ -10,7 +10,7 @@ DEPS := $(patsubst %.cpp,$(DEPDIR)/%.makefile,$(SRCS))
 ODIR := build
 OBJS := $(patsubst %.cpp,$(ODIR)/%.o,$(SRCS))
 
-container_tests: $(OBJS) 
+cpp_container_tests: $(OBJS) 
 	$(CC) -o $@ $(OBJS) $(CFLAGS)
 
 $(DEPDIR):
