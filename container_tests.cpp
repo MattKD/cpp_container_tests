@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
   int NUM_ITERS = 1000;
   int NUM_ELEMENTS = 100000;
-  int NUM_ADD_REMOVE = 500;
+  int NUM_ADD_REMOVE = 100;
 
   try {
     for (int i = 1; i < argc; i++) {
