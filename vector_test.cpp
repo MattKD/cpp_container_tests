@@ -117,20 +117,55 @@ batchedAddTest(std::vector<std::pair<Foo*,bool>> &foo_ptrs,
   for (Foo *f : to_add) {
     foo_ptrs.push_back(std::make_pair(f, true));
   }
-  auto compare = [](std::pair<Foo*,bool> f1, std::pair<Foo*,bool> f2) { 
-    if (f1.second == false) {
-      return false;
-    } else if (f2.second == false) {
-      return true; 
-    } else {
-      return f1.first < f2.first; 
-    }
-  };
-  std::sort(foo_ptrs.begin(), foo_ptrs.end(), compare);
 
-  while (foo_ptrs.back().second == false) {
-    foo_ptrs.pop_back();
+  std::vector<std::pair<Foo*,bool>> cpy_buff(foo_ptrs.size());
+
+  const auto new_begin_it = foo_ptrs.end() - to_add.size();
+  auto compare = [](std::pair<Foo*,bool> f1, std::pair<Foo*,bool> f2) { 
+      return f1.first < f2.first; 
+  };
+  std::sort(new_begin_it, foo_ptrs.end(), compare);
+
+  auto it = foo_ptrs.begin();
+  auto new_it = new_begin_it;
+  auto cpy_it = cpy_buff.begin();
+  const auto end_it = foo_ptrs.end();
+
+  while (it != new_begin_it && new_it != end_it) {
+    if (it->second == false) {
+      ++it;
+      cpy_buff.pop_back();
+      continue;
+    } else if (it->first < new_it->first) {
+      *cpy_it = *it;
+      ++it;
+    } else {
+      *cpy_it = *new_it;
+      ++new_it;
+    }
+    ++cpy_it;
   }
+
+  if (it != new_begin_it) {
+    while (it != new_begin_it) {
+      if (it->second == false) {
+        ++it;
+        cpy_buff.pop_back();
+        continue;
+      }
+      *cpy_it = *it;
+      ++it;
+      ++cpy_it;
+    }
+  } else {
+    while (new_it != end_it) {
+      *cpy_it = *new_it;
+      ++new_it;
+      ++cpy_it;
+    }
+  }
+
+  foo_ptrs = std::move(cpy_buff);
 
   auto end = c::high_resolution_clock::now();
   auto d = c::duration<double, c::milliseconds::period>(end-start);
